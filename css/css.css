@@ -1,0 +1,60 @@
+* {
+	margin:0px;	
+	padding:0px;
+}
+@font-face {
+	font-family: 'Anonymous Pro';
+	src: url('../inc/fonts/anonymouspro.ttf');
+}
+
+body {
+	background-color:#403B3D;
+	font-family:Helvetica,Arial;
+	color:#71B330;
+}
+div.space {
+	float:left;
+}
+div.break {
+	clear:both;
+}
+
+
+
+#wrap {
+	background-color:#141414;
+	width:1000px;
+	padding:20px 83px;
+	margin:10px auto;
+	border:1px solid black;
+}
+.line {
+	height:25px;
+}
+.line p.code{
+	float:left;
+	font-family:'Anonymous Pro';
+	font-size:13px;
+	color:#F04646;
+	position: relative;
+    top: 5px;
+}
+.line input {
+	float:left;
+	position: relative;
+	height:20px;
+    top: 2px;
+    width:50px;
+}
+.line button {
+	float:left;
+	height:20px;
+	position:relative;
+	top:2px;
+	font-family: tahoma;
+    font-size: 12px;
+}
+
+.visited a {
+	color: #aa3399;
+}
