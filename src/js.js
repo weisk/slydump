@@ -22,7 +22,9 @@ function search(type,str) {
 }
 
 function loadSerie(ids) {
-	resetSerie();
+	//resetSerie();
+	removeLevel(3);
+	slide(3);
 	var uri = "inc/sly_hook.php?action=load&type=serie&ids="+ids;
 	getAJAX(uri,2);
 }
@@ -171,10 +173,8 @@ function changeSeason(i) {
 }
 
 function addLevel(s,pos) {
-	removeLevel(pos);
 	var html = "<li class='level' pos='"+pos+"'><a onclick='slide("+pos+")'>"+s+"</a></li><li class='divider-vertical'></li>";
 	$('#subnav .level[pos='+(pos-1)+']').next().after(html);
-	slide(pos);
 }
 
 function removeLevel(pos) {
