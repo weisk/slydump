@@ -145,13 +145,10 @@
 		<script type="text/javascript" src="lib/ga.js"></script>
 		<script type="text/javascript">
 			(function(){setTimeout(function(){
-		<?php
-			if(($_POST['serie-ids']!="")&&($_POST['serie-poster']!="")&&($_POST['serie-title']!="")) {
-				echo "loadSerie('".$_POST['serie-ids']."','".$_POST['serie-poster']."','".$_POST['serie-title']."');";
-			} else { 
-				echo "slide(1);";
-			}
-		?>
+			<?php
+				if($_POST['serie-ids']!="")	echo "loadSerie(".$_POST['serie-ids'].");";
+				else 						echo "slide(1);";
+			?>
 			},300)})();
 		</script>
 	</body>

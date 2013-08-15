@@ -21,13 +21,8 @@ function search(type,str) {
 	}
 }
 
-function loadSerie(ids,poster,title) {
-	$('#serie-ids').val(ids);$('#serie-poster').val(poster);$('#serie-title').val(title);
-	$('#poster').attr('src',poster);
+function loadSerie(ids) {
 	resetSerie();
-	removeLevel(3);
-	addLevel(title,3);
-	slide(3);
 	var uri = "inc/sly_hook.php?action=load&type=serie&ids="+ids;
 	getAJAX(uri,2);
 }
@@ -59,7 +54,7 @@ function parse(data,type,arg1) {
 			var html = '';
 			for(var i=0;i<x.length;i++) {
 				var y = x[i].object;
-				var onclick = 'loadSerie(\''+y.idm+'\',\''+y.poster.large+'\',\''+y.name+'\')';
+				var onclick = 'loadSerie('+y.idm+')';
 				html += '<tr onclick="'+onclick+'"><td><img src="'+y.poster.small+'"><td>'+y.name+'</td><td>'+y.seasons+'</td><td>'+y.episodes+'</td></tr>';
 			}
 			$('#tbody_1').html(html);
@@ -69,6 +64,10 @@ function parse(data,type,arg1) {
 			var title = ''; if (x.name) title = x.name;
 			var plot = ''; if (x.plot) plot = x.plot;
 			var html = '';
+			$('#serie-ids').val(x.idm);
+			$('#poster').attr('src',x.img);
+			addLevel(title,3);
+
 			html+='<span class="strong">Titulo </span>'+title+'<br><br>';
 			html+='<span class="strong">Sinopsis </span>'+plot;
 			$('#descr .span9').html(html);
@@ -136,9 +135,8 @@ function parse(data,type,arg1) {
 			var x = eval("("+data+")");
 			var html = '<div class="row-fluid"><ul class="thumbnails">';
 			for(var i=0;i<x.length;i++){
-				if(i%4==0 && i!=0) { html+= '</ul></div><div class="row-fluid"><ul class="thumbnails">'; }
-				var onclick = 'loadSerie(\''+x[i].ids+'\',\''+x[i].img+'\',\''+x[i].title+'\')';
-				html+= '<li class="span3"><a class="thumbnail" onclick="'+onclick+'">';
+				//if(i%4==0 && i!=0) { html+= '</ul></div><div class="row-fluid"><ul class="thumbnails">'; }
+				html+= '<li class="span3"><a class="thumbnail" onclick="loadSerie('+x[i].ids+')">';
 				html+= '<img alt="'+x[i].title+'" src="'+x[i].img+'">';
 				html+= '<p>'+x[i].title+'</p>';
 				html+= '</a></li>';
@@ -173,8 +171,10 @@ function changeSeason(i) {
 }
 
 function addLevel(s,pos) {
+	removeLevel(pos);
 	var html = "<li class='level' pos='"+pos+"'><a onclick='slide("+pos+")'>"+s+"</a></li><li class='divider-vertical'></li>";
 	$('#subnav .level[pos='+(pos-1)+']').next().after(html);
+	slide(pos);
 }
 
 function removeLevel(pos) {
