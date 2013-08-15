@@ -135,7 +135,7 @@ function parse(data,type,arg1) {
 			var x = eval("("+data+")");
 			var html = '<div class="row-fluid"><ul class="thumbnails">';
 			for(var i=0;i<x.length;i++){
-				//if(i%4==0 && i!=0) { html+= '</ul></div><div class="row-fluid"><ul class="thumbnails">'; }
+				if(i%4==0 && i!=0) { html+= '</ul></div><div class="row-fluid"><ul class="thumbnails">'; }
 				html+= '<li class="span3"><a class="thumbnail" onclick="loadSerie('+x[i].ids+')">';
 				html+= '<img alt="'+x[i].title+'" src="'+x[i].img+'">';
 				html+= '<p>'+x[i].title+'</p>';
